@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node ./src/index.js",
     "postinstall": "npm install",
-    "postinstall": "npm install tui-calendar",
+    "postinstall": "npm install tui-calendar -g",
     "serve": "webpack-dev-server"
   },
   "repository": {
