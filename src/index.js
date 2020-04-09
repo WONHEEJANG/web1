@@ -7,87 +7,9 @@ import 'tui-time-picker/dist/tui-time-picker.css';
 const calendar = new Calendar('#calendar', {
   defaultView: 'week',
   useCreationPopup: true,
-  useDetailPopup: true,
-  //taskView : false,
-  //scheduleView : false
+  useDetailPopup: true
 });
-
 calendar.render();
-
-
-calendar.createSchedules([
-
-  {
-    id: '2',
-    calendarId: 'Major Lecture',
-    title: '건강과 영',
-    category: 'time',
-    dueDateClass: '',
-    start: '2020-04-07T14:30:00',
-    end: '2020-04-07T16:30:00',
-    isReadOnly: true // schedule is read-only
-  }
-]);
-calendar.createSchedules([
-  {
-    id: '3',
-    calendarId: 'Travel', // calendarId가 바뀌었죠?
-    title: '강촌 OT',
-    category: 'allday', // 'allday'로 지정합니다
-    start: '2020-04-05',
-    end: '2020-04-05',
-    color: '#ffffff', // 일정 색상을 직접 지정할 수 있어요
-    bgColor: '#03bd9e',
-    dragBgColor: '#03bd9e',
-    borderColor: '#03bd9e'
-  }
-]);
-calendar.createSchedules([
-  {
-    id: '4',
-    calendarId: 'Major Lecture',
-    title: '소프트웨어 개론 레포트 제출',
-    category: 'task', // 'task'로 지정합니다
-    start: '2020-04-06T10:30:00',
-    end: '2020-04-06T11:30:00',
-    color: '#ffffff', // 일정 색상을 직접 지정할 수 있어요
-    bgColor: '#9e5fff',
-    dragBgColor: '#9e5fff',
-    borderColor: '#9e5fff'
-  }
-]);
-
-calendar.createSchedules([
-  {
-    id: '5',
-    calendarId: 'Homework',
-    title: '중간고사 종료',
-    category: 'milestone', // 'milestone'으로 지정합니다
-    start: '2020-04-08T10:30:00',
-    end: '2020-04-08T11:30:00',
-    color: '#bbdc00', // 일정 색상을 직접 지정할 수 있어요
-    bgColor: '#ffffff',
-    dragBgColor: '#ffffff',
-    borderColor: '#ffffff'
-  }
-]);
-
-
-
-calendar.setCalendarColor('Major Lecture', {
-  color: '#ffffff',
-  bgColor: '#ff5583',
-  dragBgColor: '#ff5583',
-  borderColor: '#ff5583'
-});
-calendar.setCalendarColor('General Lecture', {
-  color: '#ffffff',
-  bgColor: '#dc9656',
-  dragBgColor: '#dc9656',
-  borderColor: '#dc9656'
-});
-
-
 
 
 /* ---------------------------------------------- */
@@ -99,23 +21,34 @@ const weekViewBtn = document.getElementById('weekViewBtn');
 const monthViewBtn = document.getElementById('monthViewBtn');
 
 prevBtn.addEventListener('click', () => {
-
+calendar.prev();
 });
 
 nextBtn.addEventListener('click', () => {
-
+calendar.next();
 });
 
 dayViewBtn.addEventListener('click', () => {
-calendar.changeView('day', true);
+  // 일간 보기
+  calendar.changeView('day', true);
 });
 
 weekViewBtn.addEventListener('click', () => {
-calendar.changeView('week', true);
+    // 주간 보기
+    calendar.changeView('week', true);
 });
 
 monthViewBtn.addEventListener('click', () => {
-calendar.changeView('month', true);
+
+      // 월간 보기
+      calendar.changeView('month', true);
+});
+
+calendar.setCalendarColor('Major Lecture', {
+  color: '#ffffff',
+  bgColor: '#ff5583',
+  dragBgColor: '#ff5583',
+  borderColor: '#ff5583'
 });
 
 calendar.on('beforeCreateSchedule', scheduleData => {
@@ -134,10 +67,29 @@ calendar.on('beforeCreateSchedule', scheduleData => {
   alert('일정 생성 완료');
 });
 
-calendar.on('beforeUpdateSchedule', scheduleData => {
-  const {schedule} = scheduleData;
+calendar.on('clickSchedule', function(event) {
+    var schedule = event.schedule;
 
-  calendar.updateSchedule(schedule.id, schedule.calendarId, schedule);
+    // focus the schedule
+    if (lastClickSchedule) {
+        calendar.updateSchedule(lastClickSchedule.id, lastClickSchedule.calendarId, {
+            isFocused: false
+        });
+    }
+    calendar.updateSchedule(schedule.id, schedule.calendarId, {
+        isFocused: true
+    });
+
+    lastClickSchedule = schedule;
+
+    // open detail view
+});
+
+calendar.on('beforeUpdateSchedule', function(event) {
+    var schedule = event.schedule;
+    var changes = event.changes;
+
+    calendar.updateSchedule(schedule.id, schedule.calendarId, changes);
 });
 
 calendar.on('beforeDeleteSchedule', scheduleData => {
