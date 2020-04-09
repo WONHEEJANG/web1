@@ -5,9 +5,7 @@
   "main": "./index.js",
   "scripts": {
     "serve": "webpack-dev-server",
-    "postinstall": "npm install",
-    "postinstall": "npm install tui-calendar -g",
-    "heroku-prebuild": "npm install --dev"
+    "install": "npm install --dev"
   },
   "repository": {
     "type": "git",
