@@ -4,10 +4,9 @@
   "description": "NHN Forward 2019",
   "main": "./index.js",
   "scripts": {
-    "start": "node ./src/index.js",
+    "start": "webpack-dev-server",
     "postinstall": "npm install",
-    "postinstall": "npm install tui-calendar -g",
-    "serve": "webpack-dev-server"
+    "postinstall": "npm install tui-calendar -g"
   },
   "repository": {
     "type": "git",
