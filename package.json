@@ -7,7 +7,7 @@
     "serve": "webpack-dev-server",
     "postinstall": "npm install",
     "postinstall": "npm install tui-calendar -g",
-    "heroku-prebuild": "npm install --dev",
+    "heroku-prebuild": "npm install --dev"
   },
   "repository": {
     "type": "git",
