@@ -6,7 +6,8 @@
   "scripts": {
     "install" : "npm install webpack-dev-server -g",
     "serve": "webpack-dev-server",
-    "prebuild": "npm install --dev"
+    "prebuild": "npm install --dev",
+    "link" : "webpack"
   },
   "repository": {
     "type": "git",
