@@ -4,6 +4,7 @@
   "description": "NHN Forward 2019",
   "main": "./index.js",
   "scripts": {
+    "install" : "npm install webpack -g",
     "install" : "npm install webpack-dev-server -g",
     "serve": "webpack-dev-server",
     "prebuild": "npm install --dev",
