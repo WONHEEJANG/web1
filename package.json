@@ -5,7 +5,7 @@
   "main": "./index.js",
   "scripts": {
     "serve": "webpack-dev-server",
-    "install": "npm install --dev"
+    "prebuild": "npm install --dev"
   },
   "repository": {
     "type": "git",
