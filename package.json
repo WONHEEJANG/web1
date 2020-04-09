@@ -2,9 +2,9 @@
   "name": "hands-on-labs.toastui.calendar-timetable",
   "version": "1.0.1",
   "description": "NHN Forward 2019",
-  "main": "index.js",
+  "main": "./index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node ./index.js",
     "serve": "webpack-dev-server"
   },
   "repository": {
